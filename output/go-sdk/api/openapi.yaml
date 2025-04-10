@@ -1,0 +1,651 @@
+openapi: 3.0.4
+info:
+  description: creating docu of wapi a record documentation
+  title: A record
+  version: "2.10"
+servers:
+- description: infoblox wapi server
+  url: https://172.28.82.7/wapi/v2.10.3
+security:
+- basicAuth: []
+paths:
+  /record:a:
+    get:
+      parameters:
+      - description: "Comma-separated fields to return (e.g., name, ipv4addr)"
+        explode: true
+        in: query
+        name: _return_fields
+        required: false
+        schema:
+          example: "name,ipv4addr"
+          type: string
+        style: form
+      - description: Give positive value to indicate records to be truncated
+        explode: true
+        in: query
+        name: _max_results
+        required: false
+        schema:
+          maximum: 1000
+          minimum: 1
+          type: integer
+        style: form
+      - description: Returns basic fields as default as well as non-basic fields when
+          mentioned explicitly
+        explode: true
+        in: query
+        name: _return_fields+
+        required: false
+        schema:
+          example: comments
+          type: string
+        style: form
+      - description: "If set to 1, returns result as object"
+        explode: true
+        in: query
+        name: _return_as_object
+        required: false
+        schema:
+          enum:
+          - 0
+          - 1
+          type: integer
+        style: form
+      - description: |
+          A filter object for regex searches. If you want to use a basic operator (e.g., '='), enter the value as a string.  For specific operators, use the object format with 'value' and 'op' fields.
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          $ref: '#/components/schemas/_record_a_get_name_parameter'
+        style: form
+      - description: |
+          A filter object for regex searches. If you want to use a basic operator (e.g., '='), enter the value as a string.  For specific operators, use the object format with 'value' and 'op' fields.
+        explode: true
+        in: query
+        name: comment
+        required: false
+        schema:
+          $ref: '#/components/schemas/_record_a_get_name_parameter'
+        style: form
+      responses:
+        "200":
+          description: Successful
+        "404":
+          description: Referenced object not found
+      summary: Get A Records
+    post:
+      description: method to create record a
+      parameters:
+      - description: it can be used to override a methods property
+        explode: true
+        in: query
+        name: _method
+        required: false
+        schema:
+          enum:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecordACreateRequest'
+      responses:
+        "200":
+          description: hello
+      summary: to create  record
+  /record:a/{obj_ref}:
+    delete:
+      description: delete
+      parameters:
+      - explode: false
+        in: path
+        name: obj_ref
+        required: true
+        schema:
+          description: reference to the object
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: good
+      summary: king
+    get:
+      description: hi
+      parameters:
+      - explode: false
+        in: path
+        name: obj_ref
+        required: true
+        schema:
+          description: reference to the object
+          type: string
+        style: simple
+      - description: "Comma-separated fields to return (e.g., name, ipv4addr)"
+        explode: true
+        in: query
+        name: _return_fields
+        required: false
+        schema:
+          example: "name,ipv4addr"
+          type: string
+        style: form
+      - description: Give positive value to indicate records to be truncated
+        explode: true
+        in: query
+        name: _max_results
+        required: false
+        schema:
+          maximum: 1000
+          minimum: 1
+          type: integer
+        style: form
+      - description: Returns basic fields as default as well as non-basic fields when
+          mentioned explicitly
+        explode: true
+        in: query
+        name: _return_fields+
+        required: false
+        schema:
+          example: comments
+          type: string
+        style: form
+      - description: "If set to 1, returns result as object"
+        explode: true
+        in: query
+        name: _return_as_object
+        required: false
+        schema:
+          enum:
+          - 0
+          - 1
+          type: integer
+        style: form
+      responses:
+        "200":
+          description: Successful
+        "404":
+          description: Referenced object not found
+      summary: hello
+    post:
+      description: hello
+      parameters:
+      - explode: false
+        in: path
+        name: obj_ref
+        required: true
+        schema:
+          description: reference to the object
+          type: string
+        style: simple
+      - description: "Comma-separated fields to return (e.g., name, ipv4addr)"
+        explode: true
+        in: query
+        name: _return_fields
+        required: false
+        schema:
+          example: "name,ipv4addr"
+          type: string
+        style: form
+      - description: it can be used to override a methods property
+        explode: true
+        in: query
+        name: _method
+        required: false
+        schema:
+          enum:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecordACreateRequest'
+      responses:
+        "200":
+          description: good
+      summary: king
+    put:
+      description: hello
+      parameters:
+      - explode: false
+        in: path
+        name: obj_ref
+        required: true
+        schema:
+          description: reference to the object
+          type: string
+        style: simple
+      - description: "Comma-separated fields to return (e.g., name, ipv4addr)"
+        explode: true
+        in: query
+        name: _return_fields
+        required: false
+        schema:
+          example: "name,ipv4addr"
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecordACreateRequest'
+      responses:
+        "200":
+          description: good
+      summary: king
+  /request:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/_request_post_request_inner'
+              type: array
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_request_post_200_response'
+          description: Successful response
+      summary: Execute a series of network management requests
+components:
+  parameters:
+    objectref:
+      explode: false
+      in: path
+      name: obj_ref
+      required: true
+      schema:
+        description: reference to the object
+        type: string
+      style: simple
+    ReturnFields:
+      description: "Comma-separated fields to return (e.g., name, ipv4addr)"
+      explode: true
+      in: query
+      name: _return_fields
+      required: false
+      schema:
+        example: "name,ipv4addr"
+        type: string
+      style: form
+    MaxResults:
+      description: Give positive value to indicate records to be truncated
+      explode: true
+      in: query
+      name: _max_results
+      required: false
+      schema:
+        maximum: 1000
+        minimum: 1
+        type: integer
+      style: form
+    ReturnFieldsPlus:
+      description: Returns basic fields as default as well as non-basic fields when
+        mentioned explicitly
+      explode: true
+      in: query
+      name: _return_fields+
+      required: false
+      schema:
+        example: comments
+        type: string
+      style: form
+    ReturnAsObject:
+      description: "If set to 1, returns result as object"
+      explode: true
+      in: query
+      name: _return_as_object
+      required: false
+      schema:
+        enum:
+        - 0
+        - 1
+        type: integer
+      style: form
+    Method:
+      description: it can be used to override a methods property
+      explode: true
+      in: query
+      name: _method
+      required: false
+      schema:
+        enum:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        type: string
+      style: form
+  schemas:
+    ExtensibleAttributes:
+      additionalProperties:
+        $ref: '#/components/schemas/ExtensibleAttributes_value'
+      type: object
+    IPv4Addr:
+      oneOf:
+      - description: |
+          Provide either a:
+          - **Plain IP address** like `"1.2.3.4"`
+          - Or a **Next Available IP function string** like:
+            - `"func:nextavailableip:10.0.0.0/8"`
+            - `"func:nextavailableip:10.0.0.0/8,external"`
+            - `"func:nextavailableip:10.0.0.3-10.0.0.10"`
+        example: func:nextavailableip:10.0.0.0/8
+        type: string
+      - $ref: '#/components/schemas/IPv4Addr_oneOf'
+    RecordACreateRequest:
+      example:
+        creation_time: 2000-01-23T04:56:07.000+00:00
+        creator: creator
+        extattrs:
+          key:
+            value: value
+        use_ttl: true
+        cloud_info:
+          delegated_member:
+            name: name
+            ipv4addr: ipv4addr
+            ipv6addr: ipv6addr
+          delegated_scope: NONE
+          owned_by_adaptor: true
+          usage: ADAPTER
+          authority_type: CP
+          mgmt_platform: mgmt_platform
+          tenant: tenant
+          delegated_root: delegated_root
+        ddns_protected: true
+        ipv4addr: func:nextavailableip:10.0.0.0/8
+        ttl: 8
+        view: view
+        zone: zone
+        ddns_principal: true
+        disable: true
+        name: name
+        comment: comment
+      properties:
+        name:
+          type: string
+          writeOnly: true
+        ipv4addr:
+          $ref: '#/components/schemas/IPv4Addr'
+        ddns_principal:
+          type: boolean
+          writeOnly: true
+        ddns_protected:
+          type: boolean
+          writeOnly: true
+        comment:
+          type: string
+          writeOnly: true
+        creation_time:
+          format: date-time
+          readOnly: true
+          type: string
+        creator:
+          type: string
+          writeOnly: true
+        disable:
+          type: boolean
+          writeOnly: true
+        zone:
+          readOnly: true
+          type: string
+        view:
+          type: string
+          writeOnly: true
+        ttl:
+          maximum: 100
+          minimum: 0
+          type: integer
+          writeOnly: true
+        use_ttl:
+          type: boolean
+          writeOnly: true
+        cloud_info:
+          $ref: '#/components/schemas/RecordACreateRequest_cloud_info'
+        extattrs:
+          additionalProperties:
+            $ref: '#/components/schemas/ExtensibleAttributes_value'
+          type: object
+      type: object
+    BasicOperator:
+      description: "Basic operator (e.g., =). Example: exampleValue"
+      example: exampleValue
+      type: string
+    SpecificOperator:
+      description: Specific operator with 'value' and 'op' fields.
+      properties:
+        value:
+          description: The value to filter by.
+          example: exampleValue
+          type: string
+        op:
+          description: The operator to use for filtering.
+          example: "~"
+          type: string
+      type: object
+    _record_a_get_name_parameter:
+      oneOf:
+      - $ref: '#/components/schemas/BasicOperator'
+      - $ref: '#/components/schemas/SpecificOperator'
+    _request_post_request_inner_data:
+      description: Data to be sent with the request (for GET requests)
+      properties:
+        network:
+          example: 192.168.1.0/24
+          type: string
+      type: object
+    _request_post_request_inner_assign_state:
+      description: State assignment for the response
+      properties:
+        netw_ref:
+          example: _ref
+          type: string
+      type: object
+    _request_post_request_inner_args:
+      description: Arguments for the POST request
+      properties:
+        _function:
+          example: next_available_ip
+          type: string
+      type: object
+    _request_post_request_inner:
+      properties:
+        method:
+          description: The HTTP method to use for the request
+          enum:
+          - GET
+          - POST
+          type: string
+        object:
+          description: The object type to interact with
+          type: string
+        data:
+          $ref: '#/components/schemas/_request_post_request_inner_data'
+        assign_state:
+          $ref: '#/components/schemas/_request_post_request_inner_assign_state'
+        discard:
+          description: Whether to discard the response
+          type: boolean
+        args:
+          $ref: '#/components/schemas/_request_post_request_inner_args'
+        enable_substitution:
+          description: Whether to enable substitution in the request
+          type: boolean
+      type: object
+    _request_post_200_response:
+      example:
+        next_available_ip: next_available_ip
+        netw_ref: netw_ref
+      properties:
+        netw_ref:
+          description: Reference to the network object
+          type: string
+        next_available_ip:
+          description: The next available IP address in the network
+          type: string
+      type: object
+    ExtensibleAttributes_value:
+      example:
+        value: value
+      properties:
+        value:
+          type: string
+      type: object
+    IPv4Addr_oneOf__parameters:
+      properties:
+        exclude:
+          example:
+          - 9.0.0.1
+          - 9.0.0.2
+          items:
+            type: string
+          type: array
+        num:
+          example: 3
+          type: integer
+      type: object
+    IPv4Addr_oneOf__object_parameters:
+      properties:
+        network:
+          example: 9.0.0.0/8
+          type: string
+        network_view:
+          example: default
+          type: string
+        comment:
+          example: default
+          type: string
+      type: object
+    IPv4Addr_oneOf:
+      description: |
+        Or provide an **object for next_available_ip** with more control.
+
+        Example:
+        ```json
+        {
+          "_object_function": "next_available_ip",
+          "_parameters": {
+            "exclude": ["9.0.0.1", "9.0.0.2"],
+            "num": 3
+          },
+          "_result_field": "ips",
+          "_object": "network",
+          "_object_parameters": {
+            "network": "9.0.0.0/8",
+            "network_view": "default"
+          }
+        }
+        ```
+      example:
+        _object_function: next_available_ip
+        _parameters:
+          exclude:
+          - 9.0.0.1
+          - 9.0.0.2
+          num: 3
+        _result_field: ips
+        _object: network
+        _object_parameters:
+          network: 9.0.0.0/8
+          network_view: default
+      properties:
+        _object_function:
+          example: next_available_ip
+          type: string
+        _parameters:
+          $ref: '#/components/schemas/IPv4Addr_oneOf__parameters'
+        _result_field:
+          example: ips
+          type: string
+        _object:
+          example: network
+          type: string
+        _object_parameters:
+          $ref: '#/components/schemas/IPv4Addr_oneOf__object_parameters'
+      required:
+      - _object
+      - _object_function
+      - _object_parameters
+      - _parameters
+      - _result_field
+      type: object
+    RecordACreateRequest_cloud_info_delegated_member:
+      example:
+        name: name
+        ipv4addr: ipv4addr
+        ipv6addr: ipv6addr
+      properties:
+        ipv4addr:
+          type: string
+        ipv6addr:
+          type: string
+        name:
+          type: string
+      type: object
+    RecordACreateRequest_cloud_info:
+      example:
+        delegated_member:
+          name: name
+          ipv4addr: ipv4addr
+          ipv6addr: ipv6addr
+        delegated_scope: NONE
+        owned_by_adaptor: true
+        usage: ADAPTER
+        authority_type: CP
+        mgmt_platform: mgmt_platform
+        tenant: tenant
+        delegated_root: delegated_root
+      properties:
+        authority_type:
+          enum:
+          - CP
+          - GM
+          - NONE
+          type: string
+        delegated_member:
+          $ref: '#/components/schemas/RecordACreateRequest_cloud_info_delegated_member'
+        delegated_root:
+          type: string
+        delegated_scope:
+          enum:
+          - NONE
+          - RECLAIMING
+          - ROOT
+          - SUBTREE
+          type: string
+        mgmt_platform:
+          type: string
+        owned_by_adaptor:
+          type: boolean
+        tenant:
+          type: string
+        usage:
+          enum:
+          - ADAPTER
+          - DELEGATED
+          - NONE
+          - USED_BY
+          type: string
+      readOnly: true
+      type: object
+  securitySchemes:
+    basicAuth:
+      scheme: basic
+      type: http
