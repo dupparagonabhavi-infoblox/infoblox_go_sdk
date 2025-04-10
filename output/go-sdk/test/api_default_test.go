@@ -11,10 +11,11 @@ package openapi
 
 import (
 	"context"
+	"testing"
+
+	openapiclient "github.com/dupparagonabhavi-infoblox/infoblox_go_sdk/output/go-sdk"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
-	openapiclient "github.com/dupparagonabhavi-infoblox/infoblox_go_sdk"
 )
 
 func Test_openapi_DefaultAPIService(t *testing.T) {
@@ -24,7 +25,7 @@ func Test_openapi_DefaultAPIService(t *testing.T) {
 
 	t.Run("Test DefaultAPIService RecordAGet", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		httpRes, err := apiClient.DefaultAPI.RecordAGet(context.Background()).Execute()
 
@@ -35,7 +36,7 @@ func Test_openapi_DefaultAPIService(t *testing.T) {
 
 	t.Run("Test DefaultAPIService RecordAObjRefDelete", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var objRef string
 
@@ -48,7 +49,7 @@ func Test_openapi_DefaultAPIService(t *testing.T) {
 
 	t.Run("Test DefaultAPIService RecordAObjRefGet", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var objRef string
 
@@ -61,7 +62,7 @@ func Test_openapi_DefaultAPIService(t *testing.T) {
 
 	t.Run("Test DefaultAPIService RecordAObjRefPost", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var objRef string
 
@@ -74,7 +75,7 @@ func Test_openapi_DefaultAPIService(t *testing.T) {
 
 	t.Run("Test DefaultAPIService RecordAObjRefPut", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var objRef string
 
@@ -87,7 +88,7 @@ func Test_openapi_DefaultAPIService(t *testing.T) {
 
 	t.Run("Test DefaultAPIService RecordAPost", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		httpRes, err := apiClient.DefaultAPI.RecordAPost(context.Background()).Execute()
 
@@ -98,7 +99,7 @@ func Test_openapi_DefaultAPIService(t *testing.T) {
 
 	t.Run("Test DefaultAPIService RequestPost", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.DefaultAPI.RequestPost(context.Background()).Execute()
 

@@ -1,4 +1,4 @@
-module github.com/dupparagonabhavi-infoblox/infoblox_go_sdk
+module github.com/dupparagonabhavi-infoblox/infoblox_go_sdk/output/go-sdk
 
 go 1.18
 
