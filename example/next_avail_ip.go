@@ -9,7 +9,7 @@ import (
 	"log"
 	"net/http"
 
-	openapi "github.com/dupparagonabhavi-infoblox/infoblox_go_sdk"
+	openapi "github.com/dupparagonabhavi-infoblox/infoblox_go_sdk/output/go-sdk"
 )
 
 func main() {
