@@ -10,7 +10,6 @@ docs/DefaultAPI.md
 docs/ExtensibleAttributesValue.md
 docs/IPv4Addr.md
 docs/IPv4AddrOneOf.md
-docs/IPv4AddrOneOfObjectParameters.md
 docs/IPv4AddrOneOfParameters.md
 docs/RecordACreateRequest.md
 docs/RecordACreateRequestCloudInfo.md
@@ -34,7 +33,6 @@ model__request_post_request_inner_data.go
 model_extensible_attributes_value.go
 model_ipv4_addr.go
 model_ipv4_addr_one_of.go
-model_ipv4_addr_one_of__object_parameters.go
 model_ipv4_addr_one_of__parameters.go
 model_record_a_create_request.go
 model_record_a_create_request_cloud_info.go

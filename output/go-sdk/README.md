@@ -92,7 +92,6 @@ Class | Method | HTTP request | Description
  - [ExtensibleAttributesValue](docs/ExtensibleAttributesValue.md)
  - [IPv4Addr](docs/IPv4Addr.md)
  - [IPv4AddrOneOf](docs/IPv4AddrOneOf.md)
- - [IPv4AddrOneOfObjectParameters](docs/IPv4AddrOneOfObjectParameters.md)
  - [IPv4AddrOneOfParameters](docs/IPv4AddrOneOfParameters.md)
  - [RecordACreateRequest](docs/RecordACreateRequest.md)
  - [RecordACreateRequestCloudInfo](docs/RecordACreateRequestCloudInfo.md)

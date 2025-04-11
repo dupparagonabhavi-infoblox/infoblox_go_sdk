@@ -8,13 +8,13 @@ Name | Type | Description | Notes
 **Parameters** | [**IPv4AddrOneOfParameters**](IPv4AddrOneOfParameters.md) |  | 
 **ResultField** | **string** |  | 
 **Object** | **string** |  | 
-**ObjectParameters** | [**IPv4AddrOneOfObjectParameters**](IPv4AddrOneOfObjectParameters.md) |  | 
+**ObjectParameters** | **map[string]string** |  | 
 
 ## Methods
 
 ### NewIPv4Addr
 
-`func NewIPv4Addr(objectFunction string, parameters IPv4AddrOneOfParameters, resultField string, object string, objectParameters IPv4AddrOneOfObjectParameters, ) *IPv4Addr`
+`func NewIPv4Addr(objectFunction string, parameters IPv4AddrOneOfParameters, resultField string, object string, objectParameters map[string]string, ) *IPv4Addr`
 
 NewIPv4Addr instantiates a new IPv4Addr object
 This constructor will assign default values to properties that have it defined,
@@ -111,20 +111,20 @@ SetObject sets Object field to given value.
 
 ### GetObjectParameters
 
-`func (o *IPv4Addr) GetObjectParameters() IPv4AddrOneOfObjectParameters`
+`func (o *IPv4Addr) GetObjectParameters() map[string]string`
 
 GetObjectParameters returns the ObjectParameters field if non-nil, zero value otherwise.
 
 ### GetObjectParametersOk
 
-`func (o *IPv4Addr) GetObjectParametersOk() (*IPv4AddrOneOfObjectParameters, bool)`
+`func (o *IPv4Addr) GetObjectParametersOk() (*map[string]string, bool)`
 
 GetObjectParametersOk returns a tuple with the ObjectParameters field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetObjectParameters
 
-`func (o *IPv4Addr) SetObjectParameters(v IPv4AddrOneOfObjectParameters)`
+`func (o *IPv4Addr) SetObjectParameters(v map[string]string)`
 
 SetObjectParameters sets ObjectParameters field to given value.
 

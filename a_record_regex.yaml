@@ -78,6 +78,7 @@ components:
           properties:
             value:
               type: string
+
        IPv4Addr:
         oneOf:
         - type: string
@@ -85,8 +86,8 @@ components:
             Provide either a:
             - **Plain IP address** like `"1.2.3.4"`
             - Or a **Next Available IP function string** like:
-              - `"func:nextavailableip:10.0.0.0/8"`
-              - `"func:nextavailableip:10.0.0.0/8,external"`
+              - `"func:nextavailableip:network_view=xyz,jisjc"`
+              - `"func:nextavailableip:{ffghv}"`
               - `"func:nextavailableip:10.0.0.3-10.0.0.10"`
           example: "func:nextavailableip:10.0.0.0/8"
         - type: object
@@ -132,16 +133,9 @@ components:
               example: network
             _object_parameters:
               type: object
-              properties:
-                network:
-                  type: string
-                  example: 9.0.0.0/8
-                network_view:
-                  type: string
-                  example: default
-                comment:
-                  type: string
-                  example: default
+              additionalProperties:
+                type: string
+                
           required:
             - _object_function
             - _parameters

@@ -25,7 +25,7 @@ type IPv4AddrOneOf struct {
 	Parameters IPv4AddrOneOfParameters `json:"_parameters"`
 	ResultField string `json:"_result_field"`
 	Object string `json:"_object"`
-	ObjectParameters IPv4AddrOneOfObjectParameters `json:"_object_parameters"`
+	ObjectParameters map[string]string `json:"_object_parameters"`
 }
 
 type _IPv4AddrOneOf IPv4AddrOneOf
@@ -34,7 +34,7 @@ type _IPv4AddrOneOf IPv4AddrOneOf
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIPv4AddrOneOf(objectFunction string, parameters IPv4AddrOneOfParameters, resultField string, object string, objectParameters IPv4AddrOneOfObjectParameters) *IPv4AddrOneOf {
+func NewIPv4AddrOneOf(objectFunction string, parameters IPv4AddrOneOfParameters, resultField string, object string, objectParameters map[string]string) *IPv4AddrOneOf {
 	this := IPv4AddrOneOf{}
 	this.ObjectFunction = objectFunction
 	this.Parameters = parameters
@@ -149,9 +149,9 @@ func (o *IPv4AddrOneOf) SetObject(v string) {
 }
 
 // GetObjectParameters returns the ObjectParameters field value
-func (o *IPv4AddrOneOf) GetObjectParameters() IPv4AddrOneOfObjectParameters {
+func (o *IPv4AddrOneOf) GetObjectParameters() map[string]string {
 	if o == nil {
-		var ret IPv4AddrOneOfObjectParameters
+		var ret map[string]string
 		return ret
 	}
 
@@ -160,7 +160,7 @@ func (o *IPv4AddrOneOf) GetObjectParameters() IPv4AddrOneOfObjectParameters {
 
 // GetObjectParametersOk returns a tuple with the ObjectParameters field value
 // and a boolean to check if the value has been set.
-func (o *IPv4AddrOneOf) GetObjectParametersOk() (*IPv4AddrOneOfObjectParameters, bool) {
+func (o *IPv4AddrOneOf) GetObjectParametersOk() (*map[string]string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -168,7 +168,7 @@ func (o *IPv4AddrOneOf) GetObjectParametersOk() (*IPv4AddrOneOfObjectParameters,
 }
 
 // SetObjectParameters sets field value
-func (o *IPv4AddrOneOf) SetObjectParameters(v IPv4AddrOneOfObjectParameters) {
+func (o *IPv4AddrOneOf) SetObjectParameters(v map[string]string) {
 	o.ObjectParameters = v
 }
 
