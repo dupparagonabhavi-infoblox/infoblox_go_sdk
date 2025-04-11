@@ -68,14 +68,14 @@ func create_record_post(client *openapi.APIClient, ctx context.Context) {
 	parameters.Num = &num32
 
 	//defining object parameters
-	var objectParameters map[string]string = make(map[string]string)
-	objectParameters["*Site"] = "Bangalore"
+	var objectParameter map[string]string = make(map[string]string)
+	objectParameter["*Site"] = "Bangalore"
 
-	filler := openapi.NewIPv4AddrOneOf("next_available_ip", *parameters, "ips", "network", objectParameters)
-
+	filler := openapi.NewIPv4AddrOneOf("next_available_ip", *parameters, "ips", "network", objectParameter)
+	ipv4addr := openapi.IPv4AddrOneOfAsIPv4Addr(filler)
 	recordData := openapi.RecordACreateRequest{
-		Name:     openapi.PtrString("goku.example.com"),
-		Ipv4addr: &filler,
+		Name:     openapi.PtrString("gojo.example.com"),
+		Ipv4addr: &ipv4addr,
 		View:     openapi.PtrString("default"),
 	}
 	apiReq := client.DefaultAPI.RecordAPost(ctx)
