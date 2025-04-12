@@ -1,0 +1,4 @@
+github.com/dupparagonabhavi-infoblox/infoblox_go_sdk/output/go-sdk v0.0.0-20250411151337-2225426ee10c h1:UXmF7bFiTlDb1tBBPWvB8ThCAodxqX3/vSnblLN1d/E=
+github.com/dupparagonabhavi-infoblox/infoblox_go_sdk/output/go-sdk v0.0.0-20250411151337-2225426ee10c/go.mod h1:EkpU14xWJqtDLBaIJq1H0R+qGWcfVtD+tEO5E0+H/3s=
+gopkg.in/validator.v2 v2.0.1 h1:xF0KWyGWXm/LM2G1TrEjqOu4pa6coO9AlWSf3msVfDY=
+gopkg.in/validator.v2 v2.0.1/go.mod h1:lIUZBlB3Im4s/eYp39Ry/wkR02yOPhZ9IwIRBjuPuG8=
