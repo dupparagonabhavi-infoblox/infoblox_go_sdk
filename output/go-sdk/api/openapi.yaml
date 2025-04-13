@@ -52,23 +52,15 @@ paths:
           - 1
           type: integer
         style: form
-      - description: |
-          A filter object for regex searches. If you want to use a basic operator (e.g., '='), enter the value as a string.  For specific operators, use the object format with 'value' and 'op' fields.
+      - description: "Dynamic filter parameters (e.g., comment~, name=, status[])."
         explode: true
         in: query
-        name: name
+        name: filter
         required: false
         schema:
-          $ref: '#/components/schemas/_record_a_get_name_parameter'
-        style: form
-      - description: |
-          A filter object for regex searches. If you want to use a basic operator (e.g., '='), enter the value as a string.  For specific operators, use the object format with 'value' and 'op' fields.
-        explode: true
-        in: query
-        name: comment
-        required: false
-        schema:
-          $ref: '#/components/schemas/_record_a_get_name_parameter'
+          additionalProperties:
+            type: string
+          type: object
         style: form
       responses:
         "200":
@@ -424,26 +416,6 @@ components:
             $ref: '#/components/schemas/ExtensibleAttributes_value'
           type: object
       type: object
-    BasicOperator:
-      description: "Basic operator (e.g., =). Example: exampleValue"
-      example: exampleValue
-      type: string
-    SpecificOperator:
-      description: Specific operator with 'value' and 'op' fields.
-      properties:
-        value:
-          description: The value to filter by.
-          example: exampleValue
-          type: string
-        op:
-          description: The operator to use for filtering.
-          example: "~"
-          type: string
-      type: object
-    _record_a_get_name_parameter:
-      oneOf:
-      - $ref: '#/components/schemas/BasicOperator'
-      - $ref: '#/components/schemas/SpecificOperator'
     _request_post_request_inner_data:
       description: Data to be sent with the request (for GET requests)
       properties:

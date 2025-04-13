@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 ## RecordAGet
 
-> RecordAGet(ctx).ReturnFields(returnFields).MaxResults(maxResults).ReturnFields2(returnFields2).ReturnAsObject(returnAsObject).Name(name).Comment(comment).Execute()
+> RecordAGet(ctx).ReturnFields(returnFields).MaxResults(maxResults).ReturnFields2(returnFields2).ReturnAsObject(returnAsObject).Filter(filter).Execute()
 
 Get A Records
 
@@ -37,12 +37,11 @@ func main() {
 	maxResults := int32(56) // int32 | Give positive value to indicate records to be truncated (optional)
 	returnFields2 := "comments" // string | Returns basic fields as default as well as non-basic fields when mentioned explicitly (optional)
 	returnAsObject := int32(56) // int32 | If set to 1, returns result as object (optional)
-	name := openapiclient._record_a_get_name_parameter{SpecificOperator: openapiclient.NewSpecificOperator()} // RecordAGetNameParameter | A filter object for regex searches. If you want to use a basic operator (e.g., '='), enter the value as a string.  For specific operators, use the object format with 'value' and 'op' fields.  (optional)
-	comment := openapiclient._record_a_get_name_parameter{SpecificOperator: openapiclient.NewSpecificOperator()} // RecordAGetNameParameter | A filter object for regex searches. If you want to use a basic operator (e.g., '='), enter the value as a string.  For specific operators, use the object format with 'value' and 'op' fields.  (optional)
+	filter := map[string]string{"key": "Inner_example"} // map[string]string | Dynamic filter parameters (e.g., comment~, name=, status[]). (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.DefaultAPI.RecordAGet(context.Background()).ReturnFields(returnFields).MaxResults(maxResults).ReturnFields2(returnFields2).ReturnAsObject(returnAsObject).Name(name).Comment(comment).Execute()
+	r, err := apiClient.DefaultAPI.RecordAGet(context.Background()).ReturnFields(returnFields).MaxResults(maxResults).ReturnFields2(returnFields2).ReturnAsObject(returnAsObject).Filter(filter).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.RecordAGet``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -65,8 +64,7 @@ Name | Type | Description  | Notes
  **maxResults** | **int32** | Give positive value to indicate records to be truncated | 
  **returnFields2** | **string** | Returns basic fields as default as well as non-basic fields when mentioned explicitly | 
  **returnAsObject** | **int32** | If set to 1, returns result as object | 
- **name** | [**RecordAGetNameParameter**](RecordAGetNameParameter.md) | A filter object for regex searches. If you want to use a basic operator (e.g., &#39;&#x3D;&#39;), enter the value as a string.  For specific operators, use the object format with &#39;value&#39; and &#39;op&#39; fields.  | 
- **comment** | [**RecordAGetNameParameter**](RecordAGetNameParameter.md) | A filter object for regex searches. If you want to use a basic operator (e.g., &#39;&#x3D;&#39;), enter the value as a string.  For specific operators, use the object format with &#39;value&#39; and &#39;op&#39; fields.  | 
+ **filter** | **map[string]string** | Dynamic filter parameters (e.g., comment~, name&#x3D;, status[]). | 
 
 ### Return type
 

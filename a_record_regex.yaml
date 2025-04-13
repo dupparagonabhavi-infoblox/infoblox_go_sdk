@@ -230,23 +230,6 @@ components:
               $ref: '#/components/schemas/ExtensibleAttributes'
               writeOnly: True
 
-       BasicOperator:
-             type: string
-             description: "Basic operator (e.g., =). Example: exampleValue"
-             example: 'exampleValue'
-
-       SpecificOperator:
-              type: object
-              description: Specific operator with 'value' and 'op' fields.
-              properties:
-                value:
-                  type: string
-                  description: The value to filter by.
-                  example: 'exampleValue'
-                op:
-                  type: string
-                  description: The operator to use for filtering.
-                  example: '~'
 
 security:
   - basicAuth: []
@@ -260,26 +243,16 @@ paths:
         - $ref: '#/components/parameters/MaxResults'
         - $ref: '#/components/parameters/ReturnFieldsPlus'
         - $ref: '#/components/parameters/ReturnAsObject'
-        - name: name
+        - name: filter
           in: query
-          description: >
-            A filter object for regex searches. If you want to use a basic operator (e.g., '='), enter the value as a string. 
-            For specific operators, use the object format with 'value' and 'op' fields.
           required: false
+          description: "Dynamic filter parameters (e.g., comment~, name=, status[])."
           schema:
-            oneOf:
-              - $ref: "#/components/schemas/BasicOperator"
-              - $ref: "#/components/schemas/SpecificOperator"
-        - name: comment
-          in: query
-          description: >
-                A filter object for regex searches. If you want to use a basic operator (e.g., '='), enter the value as a string. 
-                For specific operators, use the object format with 'value' and 'op' fields.
-          required: false
-          schema:
-                oneOf:
-                  - $ref: "#/components/schemas/BasicOperator"
-                  - $ref: "#/components/schemas/SpecificOperator"
+            type: object
+            additionalProperties:
+              type: string
+          style: form
+          explode: true
       responses:
         '200':
           description: Successful
