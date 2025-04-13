@@ -30,38 +30,50 @@ i am expecting the user to just define parameters and object_parameters rest of 
 */
 
 func create_record_post(client *openapi.APIClient, ctx context.Context, op int) {
-	//defining parameters
 	if op == 1 {
-
+		/*
+          expecting user input as
+		  {
+	         exclude=[]
+			 *Site=value
+			 comment=value	  
+		  }
+	   */
 		exclude := []string{"10.10.0.1", "10.10.0.2"}
+		traverse := make(map[string]interface{})
+		traverse["exclude"] = exclude
+		traverse["*Site"] = "Bangalore"
 		parameters := openapi.NewIPv4AddrOneOfParameters()
-		parameters.Exclude = exclude
-
-		//defining object parameters
 		var objectParameters map[string]string = make(map[string]string)
-		objectParameters["*Site"] = "Bangalore"
+		for key, value := range traverse {
+			if key == "exclude" {
+				parameters.Exclude = value.([]string)
+			} else {
+				//defining object parameters
+				objectParameters["*Site"] = fmt.Sprintf("%v", value)
+			}
+			filler := openapi.NewIPv4AddrOneOf("next_available_ip", *parameters, "ips", "network", objectParameters)
+			k := openapi.IPv4AddrOneOfAsIPv4Addr(filler)
 
-		filler := openapi.NewIPv4AddrOneOf("next_available_ip", *parameters, "ips", "network", objectParameters)
-		k := openapi.IPv4AddrOneOfAsIPv4Addr(filler)
+			recordData := openapi.RecordACreateRequest{
+				Name:     openapi.PtrString("dynamic.example.com"),
+				Ipv4addr: &k,
+				View:     openapi.PtrString("default"),
+			}
+			apiReq := client.DefaultAPI.RecordAPost(ctx)
+			apiReq = apiReq.RecordACreateRequest(recordData)
+			resp, err := client.DefaultAPI.RecordAPostExecute(apiReq)
+			if err != nil {
+				log.Fatalf("Error creating A record: %v\n", err)
+			}
+			defer resp.Body.Close()
 
-		recordData := openapi.RecordACreateRequest{
-			Name:     openapi.PtrString("dynamic.example.com"),
-			Ipv4addr: &k,
-			View:     openapi.PtrString("default"),
-		}
-		apiReq := client.DefaultAPI.RecordAPost(ctx)
-		apiReq = apiReq.RecordACreateRequest(recordData)
-		resp, err := client.DefaultAPI.RecordAPostExecute(apiReq)
-		if err != nil {
-			log.Fatalf("Error creating A record: %v\n", err)
-		}
-		defer resp.Body.Close()
-
-		fmt.Printf("Status Code: %d\n", resp.StatusCode)
-		if resp.StatusCode == 200 || resp.StatusCode == 201 {
-			fmt.Println("good")
-		} else {
-			fmt.Println("some error")
+			fmt.Printf("Status Code: %d\n", resp.StatusCode)
+			if resp.StatusCode == 200 || resp.StatusCode == 201 {
+				fmt.Println("good")
+			} else {
+				fmt.Println("some error")
+			}
 		}
 	} else if op == 2 {
 		//k := openapi.PtrString("1.2.3.4")
