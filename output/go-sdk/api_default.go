@@ -112,7 +112,9 @@ func (a *DefaultAPIService) RecordAGetExecute(r ApiRecordAGetRequest) (*http.Res
 		parameterAddToHeaderOrQuery(localVarQueryParams, "_return_as_object", r.returnAsObject, "form", "")
 	}
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "form", "")
+		for key, value := range *r.filter {
+			parameterAddToHeaderOrQuery(localVarQueryParams, key, value, "form", "")
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

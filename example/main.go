@@ -12,7 +12,7 @@ func main() {
 	config := openapi.NewConfiguration()
 	config.Host = "172.28.82.7"
 	config.Scheme = "https"
-	config.Debug = true
+	config.Debug = false
 
 	username := "admin"
 	password := "Infoblox@123"
@@ -31,7 +31,7 @@ func main() {
 	config.HTTPClient = customClient
 
 	client := openapi.NewAPIClient(config)
-	//create_record_post(client, ctx, 1)
-	regex(client, ctx)
+	create_record_post(client, ctx, 1)
+	//regex(client, ctx)
 	// Print all fields of the struct for debugging
 }
