@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"io"
 	"log"
 
 	openapi "github.com/dupparagonabhavi-infoblox/infoblox_go_sdk/output/go-sdk"
@@ -32,13 +33,13 @@ i am expecting the user to just define parameters and object_parameters rest of 
 func create_record_post(client *openapi.APIClient, ctx context.Context, op int) {
 	if op == 1 {
 		/*
-          expecting user input as
-		  {
-	         exclude=[]
-			 *Site=value
-			 comment=value	  
-		  }
-	   */
+			          expecting user input as
+					  {
+				         exclude=[]
+						 *Site=value
+						 comment=value
+					  }
+		*/
 		exclude := []string{"10.10.0.1", "10.10.0.2"}
 		traverse := make(map[string]interface{})
 		traverse["exclude"] = exclude
@@ -52,28 +53,33 @@ func create_record_post(client *openapi.APIClient, ctx context.Context, op int) 
 				//defining object parameters
 				objectParameters["*Site"] = fmt.Sprintf("%v", value)
 			}
-			filler := openapi.NewIPv4AddrOneOf("next_available_ip", *parameters, "ips", "network", objectParameters)
-			k := openapi.IPv4AddrOneOfAsIPv4Addr(filler)
+		}
+		filler := openapi.NewIPv4AddrOneOf("next_available_ip", *parameters, "ips", "network", objectParameters)
+		k := openapi.IPv4AddrOneOfAsIPv4Addr(filler)
 
-			recordData := openapi.RecordACreateRequest{
-				Name:     openapi.PtrString("dynamic.example.com"),
-				Ipv4addr: &k,
-				View:     openapi.PtrString("default"),
-			}
-			apiReq := client.DefaultAPI.RecordAPost(ctx)
-			apiReq = apiReq.RecordACreateRequest(recordData)
-			resp, err := client.DefaultAPI.RecordAPostExecute(apiReq)
+		recordData := openapi.RecordACreateRequest{
+			Name:     openapi.PtrString("dynamic.example.com"),
+			Ipv4addr: &k,
+			View:     openapi.PtrString("default"),
+		}
+		apiReq := client.DefaultAPI.RecordAPost(ctx)
+		apiReq = apiReq.RecordACreateRequest(recordData)
+		resp, err := client.DefaultAPI.RecordAPostExecute(apiReq)
+		if err != nil {
+			log.Fatalf("Error creating A record: %v\n", err)
+		}
+		defer resp.Body.Close()
+
+		fmt.Printf("Status Code: %d\n", resp.StatusCode)
+		if resp.StatusCode == 200 || resp.StatusCode == 201 {
+			fmt.Println("good")
+			body, err := io.ReadAll(resp.Body)
 			if err != nil {
-				log.Fatalf("Error creating A record: %v\n", err)
+				log.Fatalf("Error reading response body: %v\n", err)
 			}
-			defer resp.Body.Close()
-
-			fmt.Printf("Status Code: %d\n", resp.StatusCode)
-			if resp.StatusCode == 200 || resp.StatusCode == 201 {
-				fmt.Println("good")
-			} else {
-				fmt.Println("some error")
-			}
+			fmt.Printf("Response body: %s\n", string(body))
+		} else {
+			fmt.Println("some error")
 		}
 	} else if op == 2 {
 		//k := openapi.PtrString("1.2.3.4")
@@ -96,6 +102,11 @@ func create_record_post(client *openapi.APIClient, ctx context.Context, op int) 
 		fmt.Printf("Status Code: %d\n", resp.StatusCode)
 		if resp.StatusCode == 200 || resp.StatusCode == 201 {
 			fmt.Println("good")
+			body, err := io.ReadAll(resp.Body)
+			if err != nil {
+				log.Fatalf("Error reading response body: %v\n", err)
+			}
+			fmt.Printf("Response body: %s\n", string(body))
 		} else {
 			fmt.Println("some error")
 		}
