@@ -30,8 +30,7 @@ type ApiRecordAGetRequest struct {
 	maxResults *int32
 	returnFields2 *string
 	returnAsObject *int32
-	name *RecordAGetNameParameter
-	comment *RecordAGetNameParameter
+	filter *map[string]string
 }
 
 // Comma-separated fields to return (e.g., name, ipv4addr)
@@ -58,15 +57,9 @@ func (r ApiRecordAGetRequest) ReturnAsObject(returnAsObject int32) ApiRecordAGet
 	return r
 }
 
-// A filter object for regex searches. If you want to use a basic operator (e.g., &#39;&#x3D;&#39;), enter the value as a string.  For specific operators, use the object format with &#39;value&#39; and &#39;op&#39; fields. 
-func (r ApiRecordAGetRequest) Name(name RecordAGetNameParameter) ApiRecordAGetRequest {
-	r.name = &name
-	return r
-}
-
-// A filter object for regex searches. If you want to use a basic operator (e.g., &#39;&#x3D;&#39;), enter the value as a string.  For specific operators, use the object format with &#39;value&#39; and &#39;op&#39; fields. 
-func (r ApiRecordAGetRequest) Comment(comment RecordAGetNameParameter) ApiRecordAGetRequest {
-	r.comment = &comment
+// Dynamic filter parameters (e.g., comment~, name&#x3D;, status[]).
+func (r ApiRecordAGetRequest) Filter(filter map[string]string) ApiRecordAGetRequest {
+	r.filter = &filter
 	return r
 }
 
@@ -118,11 +111,10 @@ func (a *DefaultAPIService) RecordAGetExecute(r ApiRecordAGetRequest) (*http.Res
 	if r.returnAsObject != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "_return_as_object", r.returnAsObject, "form", "")
 	}
-	if r.name != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "name", r.name, "form", "")
-	}
-	if r.comment != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "comment", r.comment, "form", "")
+	if r.filter != nil {
+		for key, value := range *r.filter {
+			parameterAddToHeaderOrQuery(localVarQueryParams, key, value, "form", "")
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

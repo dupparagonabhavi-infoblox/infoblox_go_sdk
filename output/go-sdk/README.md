@@ -96,13 +96,11 @@ Class | Method | HTTP request | Description
  - [RecordACreateRequest](docs/RecordACreateRequest.md)
  - [RecordACreateRequestCloudInfo](docs/RecordACreateRequestCloudInfo.md)
  - [RecordACreateRequestCloudInfoDelegatedMember](docs/RecordACreateRequestCloudInfoDelegatedMember.md)
- - [RecordAGetNameParameter](docs/RecordAGetNameParameter.md)
  - [RequestPost200Response](docs/RequestPost200Response.md)
  - [RequestPostRequestInner](docs/RequestPostRequestInner.md)
  - [RequestPostRequestInnerArgs](docs/RequestPostRequestInnerArgs.md)
  - [RequestPostRequestInnerAssignState](docs/RequestPostRequestInnerAssignState.md)
  - [RequestPostRequestInnerData](docs/RequestPostRequestInnerData.md)
- - [SpecificOperator](docs/SpecificOperator.md)
 
 
 ## Documentation For Authorization

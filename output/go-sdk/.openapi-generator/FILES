@@ -14,17 +14,14 @@ docs/IPv4AddrOneOfParameters.md
 docs/RecordACreateRequest.md
 docs/RecordACreateRequestCloudInfo.md
 docs/RecordACreateRequestCloudInfoDelegatedMember.md
-docs/RecordAGetNameParameter.md
 docs/RequestPost200Response.md
 docs/RequestPostRequestInner.md
 docs/RequestPostRequestInnerArgs.md
 docs/RequestPostRequestInnerAssignState.md
 docs/RequestPostRequestInnerData.md
-docs/SpecificOperator.md
 git_push.sh
 go.mod
 go.sum
-model__record_a_get_name_parameter.go
 model__request_post_200_response.go
 model__request_post_request_inner.go
 model__request_post_request_inner_args.go
@@ -37,7 +34,6 @@ model_ipv4_addr_one_of__parameters.go
 model_record_a_create_request.go
 model_record_a_create_request_cloud_info.go
 model_record_a_create_request_cloud_info_delegated_member.go
-model_specific_operator.go
 response.go
 test/api_default_test.go
 utils.go
