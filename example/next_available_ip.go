@@ -43,7 +43,7 @@ func create_record_post(client *openapi.APIClient, ctx context.Context, op int) 
 		exclude := []string{"10.10.0.1", "10.10.0.2"}
 		traverse := make(map[string]interface{})
 		traverse["exclude"] = exclude
-		traverse["*Site"] = "Bangalore"
+		traverse["*Site"] = "chennai"
 		parameters := openapi.NewIPv4AddrOneOfParameters()
 		var objectParameters map[string]string = make(map[string]string)
 		for key, value := range traverse {
@@ -51,7 +51,7 @@ func create_record_post(client *openapi.APIClient, ctx context.Context, op int) 
 				parameters.Exclude = value.([]string)
 			} else {
 				//defining object parameters
-				objectParameters["*Site"] = fmt.Sprintf("%v", value)
+				objectParameters[key] = fmt.Sprintf("%v", value)
 			}
 		}
 		filler := openapi.NewIPv4AddrOneOf("next_available_ip", *parameters, "ips", "network", objectParameters)
