@@ -5,6 +5,7 @@ SWAGGER_FILE ?= ./a_record_regex.yaml
 OUTPUT_DIR ?= ./output/go-sdk
 GENERATOR ?= go
 OPENAPI_GENERATOR_CLI ?= openapi-generator
+TEMPLATE_DIR ?= ./generator/templates/sdk
 
 # ----------------------------------
 # Safety checks
@@ -33,17 +34,34 @@ help:
 	@echo "Variables:"
 	@echo "  SWAGGER_FILE       - Path to Swagger or OpenAPI spec (default: ./a_record_regex.yaml)"
 	@echo "  OUTPUT_DIR         - Output directory for generated SDK (default: ./output/go-sdk)"
+	@echo "  TEMPLATE_DIR       - Directory with custom templates (default: ./generator/templates/sdk)"
+	@echo "                       Set to empty string to use default templates"
 	@echo "Example:"
 	@echo "  make generate SWAGGER_FILE=./apispec.yaml OUTPUT_DIR=./sdk"
+	@echo "  make generate TEMPLATE_DIR=\"\"  # Use default templates"
 
 # Generate Go SDK
 generate: check-generator
 	@echo "Generating Go SDK from $(SWAGGER_FILE) to $(OUTPUT_DIR)..."
 	@mkdir -p $(OUTPUT_DIR)
-	$(OPENAPI_GENERATOR_CLI) generate \
-		-i $(SWAGGER_FILE) \
-		-g $(GENERATOR) \
-		-o $(OUTPUT_DIR)
+	@if [ -n "$(TEMPLATE_DIR)" ] && [ -d "$(TEMPLATE_DIR)" ]; then \
+		echo "Using custom templates from $(TEMPLATE_DIR)"; \
+		$(OPENAPI_GENERATOR_CLI) generate \
+			-i $(SWAGGER_FILE) \
+			-g $(GENERATOR) \
+			-o $(OUTPUT_DIR) \
+			-t $(TEMPLATE_DIR); \
+	else \
+		if [ -n "$(TEMPLATE_DIR)" ] && [ ! -d "$(TEMPLATE_DIR)" ]; then \
+			echo "⚠️ Warning: Template directory $(TEMPLATE_DIR) not found, using default templates"; \
+		else \
+			echo "Using default templates"; \
+		fi; \
+		$(OPENAPI_GENERATOR_CLI) generate \
+			-i $(SWAGGER_FILE) \
+			-g $(GENERATOR) \
+			-o $(OUTPUT_DIR); \
+	fi
 	@echo "✅ SDK generated successfully at $(OUTPUT_DIR)"
 
 # Clean generated files (including subfolders, hidden files like .travis, etc.)
