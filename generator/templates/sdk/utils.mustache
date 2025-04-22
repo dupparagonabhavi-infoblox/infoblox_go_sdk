@@ -350,3 +350,39 @@ func newStrictDecoder(data []byte) *json.Decoder {
 func reportError(format string, a ...interface{}) error {
 	return fmt.Errorf(format, a...)
 }
+
+func check_expiry(cookie string) (bool) {
+
+	parts := strings.Split(cookie, ",")
+	data := make(map[string]string)
+	for _, part := range parts {
+		if kv := strings.SplitN(part, "=", 2); len(kv) == 2 {
+			data[kv[0]] = kv[1]
+		}
+	}
+
+	ctimeUnix, err1 := strconv.ParseInt(data["ctime"], 10, 64)
+	timeoutSec, err2 := strconv.Atoi(data["timeout"])
+
+	if err1 != nil || err2 != nil {
+		fmt.Println("Error parsing ctime or timeout")
+		return true
+	}
+
+	ctime := time.Unix(ctimeUnix, 0)
+	expiration := ctime.Add(time.Duration(timeoutSec) * time.Second)
+	now := time.Now()
+
+	fmt.Println("Creation Time :", ctime)
+	fmt.Println("Timeout       :", timeoutSec, "seconds")
+	fmt.Println("Expires At    :", expiration)
+	fmt.Println("Current Time  :", now)
+	
+	if now.After(expiration) {
+		fmt.Println("Cookie expired")
+		return true
+	} else {
+		fmt.Println("Cookie not expired")
+	    return false
+	}
+}
