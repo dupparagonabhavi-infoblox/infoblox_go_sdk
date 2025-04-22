@@ -238,24 +238,6 @@ paths:
         "200":
           description: good
       summary: king
-  /request:
-    post:
-      requestBody:
-        content:
-          application/json:
-            schema:
-              items:
-                $ref: '#/components/schemas/_request_post_request_inner'
-              type: array
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/_request_post_200_response'
-          description: Successful response
-      summary: Execute a series of network management requests
 components:
   parameters:
     objectref:
@@ -416,63 +398,6 @@ components:
           additionalProperties:
             $ref: '#/components/schemas/ExtensibleAttributes_value'
           type: object
-      type: object
-    _request_post_request_inner_data:
-      description: Data to be sent with the request (for GET requests)
-      properties:
-        network:
-          example: 192.168.1.0/24
-          type: string
-      type: object
-    _request_post_request_inner_assign_state:
-      description: State assignment for the response
-      properties:
-        netw_ref:
-          example: _ref
-          type: string
-      type: object
-    _request_post_request_inner_args:
-      description: Arguments for the POST request
-      properties:
-        _function:
-          example: next_available_ip
-          type: string
-      type: object
-    _request_post_request_inner:
-      properties:
-        method:
-          description: The HTTP method to use for the request
-          enum:
-          - GET
-          - POST
-          type: string
-        object:
-          description: The object type to interact with
-          type: string
-        data:
-          $ref: '#/components/schemas/_request_post_request_inner_data'
-        assign_state:
-          $ref: '#/components/schemas/_request_post_request_inner_assign_state'
-        discard:
-          description: Whether to discard the response
-          type: boolean
-        args:
-          $ref: '#/components/schemas/_request_post_request_inner_args'
-        enable_substitution:
-          description: Whether to enable substitution in the request
-          type: boolean
-      type: object
-    _request_post_200_response:
-      example:
-        next_available_ip: next_available_ip
-        netw_ref: netw_ref
-      properties:
-        netw_ref:
-          description: Reference to the network object
-          type: string
-        next_available_ip:
-          description: The next available IP address in the network
-          type: string
       type: object
     ExtensibleAttributes_value:
       example:

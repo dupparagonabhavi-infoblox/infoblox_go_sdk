@@ -46,6 +46,7 @@ var (
 type APIClient struct {
 	cfg    *Configuration
 	common service // Reuse a single struct instead of allocating one for each service on the heap.
+	capturedCookie *APIKey
 
 	// API Services
 
@@ -259,6 +260,23 @@ func (c *APIClient) callAPI(request *http.Request) (*http.Response, error) {
 		return resp, err
 	}
 
+	if c.capturedCookie == nil  {
+		fmt.Println("hooray inside callAPI function lessgo to create cookie!!!")
+        for _, cookie := range resp.Cookies() {
+            if cookie.Name == "ibapauth" {
+                c.capturedCookie = &APIKey{
+                    Key:    cookie.Value,
+                    Prefix: cookie.Name,
+                }
+                if c.cfg.Debug {
+                    log.Printf("Captured auth cookie: %s %s\n", cookie.Name,cookie.Value)
+                }
+				fmt.Printf("Captured auth cookie: %s %s\n", cookie.Name,cookie.Value)
+                break
+            }
+        }
+    }
+
 	if c.cfg.Debug {
 		dump, err := httputil.DumpResponse(resp, true)
 		if err != nil {
@@ -419,10 +437,23 @@ func (c *APIClient) prepareRequest(
 		// Walk through any authentication.
 
 		// Basic HTTP Authentication
-		if auth, ok := ctx.Value(ContextBasicAuth).(BasicAuth); ok {
+		if c.capturedCookie != nil && !check_expiry(c.capturedCookie.Key){
+            // Use captured cookie
+			fmt.Println("hooray inside PrepareRequest of cookie_code_gen_folder function lessgo consuming cookie for auth!!!")
+            localVarRequest.AddCookie(&http.Cookie{
+                Name:     c.capturedCookie.Prefix,
+                Value:    c.capturedCookie.Key,
+                Path:     "/",
+                HttpOnly: true,
+                SameSite: http.SameSiteLaxMode,
+            })
+        }else if auth, ok := ctx.Value(ContextBasicAuth).(BasicAuth); ok {
+			if(c.capturedCookie != nil && check_expiry(c.capturedCookie.Key)){
+				fmt.Println("fallling back to basic auth due to cookie expiration")
+				c.capturedCookie = nil
+			}
 			localVarRequest.SetBasicAuth(auth.UserName, auth.Password)
 		}
-
 	}
 
 	for header, value := range c.cfg.DefaultHeader {

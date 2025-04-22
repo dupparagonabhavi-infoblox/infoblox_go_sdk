@@ -388,6 +388,17 @@ func (a *{{{classname}}}Service) {{nickname}}Execute(r {{#structPrefix}}{{&class
 	}
 
 {{/withCustomMiddlewareFunction}}
+
+    if localVarHTTPResponse.StatusCode == 401 {
+		a.client.capturedCookie=nil
+		resp,err:=a.{{nickname}}Execute(r)
+		if err != nil {
+			return localVarHTTPResponse, err
+		}else{
+			localVarHTTPResponse=resp
+		}
+	} 
+
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,

@@ -10,7 +10,6 @@ Method | HTTP request | Description
 [**RecordAObjRefPost**](DefaultAPI.md#RecordAObjRefPost) | **Post** /record:a/{obj_ref} | king
 [**RecordAObjRefPut**](DefaultAPI.md#RecordAObjRefPut) | **Put** /record:a/{obj_ref} | king
 [**RecordAPost**](DefaultAPI.md#RecordAPost) | **Post** /record:a | to create  record
-[**RequestPost**](DefaultAPI.md#RequestPost) | **Post** /request | Execute a series of network management requests
 
 
 
@@ -434,70 +433,6 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: application/json
 - **Accept**: Not defined
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## RequestPost
-
-> RequestPost200Response RequestPost(ctx).RequestPostRequestInner(requestPostRequestInner).Execute()
-
-Execute a series of network management requests
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-	requestPostRequestInner := []openapiclient.RequestPostRequestInner{*openapiclient.NewRequestPostRequestInner()} // []RequestPostRequestInner | 
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DefaultAPI.RequestPost(context.Background()).RequestPostRequestInner(requestPostRequestInner).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.RequestPost``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `RequestPost`: RequestPost200Response
-	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.RequestPost`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiRequestPostRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **requestPostRequestInner** | [**[]RequestPostRequestInner**](RequestPostRequestInner.md) |  | 
-
-### Return type
-
-[**RequestPost200Response**](RequestPost200Response.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

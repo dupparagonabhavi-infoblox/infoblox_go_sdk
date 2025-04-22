@@ -84,7 +84,6 @@ Class | Method | HTTP request | Description
 *DefaultAPI* | [**RecordAObjRefPost**](docs/DefaultAPI.md#recordaobjrefpost) | **Post** /record:a/{obj_ref} | king
 *DefaultAPI* | [**RecordAObjRefPut**](docs/DefaultAPI.md#recordaobjrefput) | **Put** /record:a/{obj_ref} | king
 *DefaultAPI* | [**RecordAPost**](docs/DefaultAPI.md#recordapost) | **Post** /record:a | to create  record
-*DefaultAPI* | [**RequestPost**](docs/DefaultAPI.md#requestpost) | **Post** /request | Execute a series of network management requests
 
 
 ## Documentation For Models
@@ -96,11 +95,6 @@ Class | Method | HTTP request | Description
  - [RecordACreateRequest](docs/RecordACreateRequest.md)
  - [RecordACreateRequestCloudInfo](docs/RecordACreateRequestCloudInfo.md)
  - [RecordACreateRequestCloudInfoDelegatedMember](docs/RecordACreateRequestCloudInfoDelegatedMember.md)
- - [RequestPost200Response](docs/RequestPost200Response.md)
- - [RequestPostRequestInner](docs/RequestPostRequestInner.md)
- - [RequestPostRequestInnerArgs](docs/RequestPostRequestInnerArgs.md)
- - [RequestPostRequestInnerAssignState](docs/RequestPostRequestInnerAssignState.md)
- - [RequestPostRequestInnerData](docs/RequestPostRequestInnerData.md)
 
 
 ## Documentation For Authorization
