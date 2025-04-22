@@ -270,7 +270,7 @@ func (c *APIClient) callAPI(request *http.Request) (*http.Response, error) {
 		return resp, err
 	}
 
-	if c.capturedCookie == nil {
+	if c.capturedCookie == nil  {
 		fmt.Println("hooray inside callAPI function lessgo to create cookie!!!")
         for _, cookie := range resp.Cookies() {
             if cookie.Name == "ibapauth" {
@@ -461,7 +461,7 @@ func (c *APIClient) prepareRequest(
 		{{/hasOAuthMethods}}
 		{{#hasHttpBasicMethods}}
 		// Basic HTTP Authentication
-		if c.capturedCookie != nil {
+		if c.capturedCookie != nil && !check_expiry(c.capturedCookie.Key){
             // Use captured cookie
 			fmt.Println("hooray inside PrepareRequest of cookie_code_gen_folder function lessgo consuming cookie for auth!!!")
             localVarRequest.AddCookie(&http.Cookie{
@@ -472,6 +472,10 @@ func (c *APIClient) prepareRequest(
                 SameSite: http.SameSiteLaxMode,
             })
         }else if auth, ok := ctx.Value(ContextBasicAuth).(BasicAuth); ok {
+			if(c.capturedCookie != nil && check_expiry(c.capturedCookie.Key)){
+				fmt.Println("fallling back to basic auth due to cookie expiration")
+				c.capturedCookie = nil
+			}
 			localVarRequest.SetBasicAuth(auth.UserName, auth.Password)
 		}
 		{{/hasHttpBasicMethods}}
