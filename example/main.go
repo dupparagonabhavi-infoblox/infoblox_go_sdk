@@ -31,7 +31,8 @@ func main() {
 	config.HTTPClient = customClient
 
 	client := openapi.NewAPIClient(config)
-	create_record_post(client, ctx, 1)
+	//create_record_post(client, ctx, 1)
 	//regex(client, ctx)
+	cookie(client, ctx)
 	// Print all fields of the struct for debugging
 }
