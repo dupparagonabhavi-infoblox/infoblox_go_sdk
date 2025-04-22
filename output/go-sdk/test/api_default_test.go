@@ -13,7 +13,7 @@ import (
 	"context"
 	"testing"
 
-	openapiclient "github.com/duppara-gonabhavi/output/go-sdk"
+	openapiclient "github.com/duppara-gonabhavi/infoblox_go_sdk/output/go-sdk"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
